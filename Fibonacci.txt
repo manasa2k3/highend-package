@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main()
+{
+    int terms,i;
+    int fib(int);
+    printf("Enter number of terms:");
+    scanf("%d",&terms);
+    printf("fibnocci series \n");
+    for(i=0;i<=terms;i++)
+    printf("%d",fib(i));
+}
+int fib(int n)
+{
+    if(n<2)
+    return n;
+    else
+    return fib(n-1)+fib(n-2);
+}
+    
