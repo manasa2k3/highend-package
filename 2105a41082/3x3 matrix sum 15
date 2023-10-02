@@ -1,0 +1,28 @@
+def is_magic_square(matrix):
+    # Check sum of rows, columns, and diagonals
+    target_sum = 15
+    for i in range(3):
+        row_sum = sum(matrix[i])
+        col_sum = sum(matrix[j][i] for j in range(3))
+        if row_sum != target_sum or col_sum != target_sum:
+            return False
+
+    diagonal1_sum = sum(matrix[i][i] for i in range(3))
+    diagonal2_sum = sum(matrix[i][2 - i] for i in range(3))
+
+    return diagonal1_sum == target_sum and diagonal2_sum == target_sum
+
+def generate_magic_square():
+    # Try all permutations of the numbers 1 to 9
+    from itertools import permutations
+
+    for perm in permutations(range(1, 10)):
+        matrix = [list(perm[i:i+3]) for i in range(0, 9, 3)]
+        if is_magic_square(matrix):
+            return matrix
+
+# Generate and print the magic square
+magic_square = generate_magic_square()
+for row in magic_square:
+    print(row)
+0
