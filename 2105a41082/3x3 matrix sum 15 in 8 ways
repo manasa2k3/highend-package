@@ -1,0 +1,43 @@
+import itertools
+
+# Define the 3x3 grid
+grid = [[0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]]
+
+# Function to check if a list of numbers sums to 15
+def is_sum_15(arr):
+    return sum(arr) == 15
+
+# Generate all permutations of the numbers 1 to 9
+permutations = itertools.permutations(range(1, 10))
+
+# Function to check if a grid satisfies the conditions
+def is_valid(grid):
+    # Check rows
+    for row in grid:
+        if not is_sum_15(row):
+            return False
+    
+    # Check columns
+    for j in range(3):
+        if not is_sum_15([grid[i][j] for i in range(3)]):
+            return False
+    
+    # Check diagonals
+    if not is_sum_15([grid[i][i] for i in range(3)]) or not is_sum_15([grid[i][2-i] for i in range(3)]):
+        return False
+    
+    return True
+
+# Find and print valid grids
+for perm in permutations:
+    grid[0][0], grid[0][1], grid[0][2] = perm[0], perm[1], perm[2]
+    grid[1][0], grid[1][1], grid[1][2] = perm[3], perm[4], perm[5]
+    grid[2][0], grid[2][1], grid[2][2] = perm[6], perm[7], perm[8]
+    
+    if is_valid(grid):
+        for row in grid:
+            print(row)
+        print()
+
