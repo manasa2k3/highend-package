@@ -1,0 +1,129 @@
+Day 7:
+
+Selection sort:
+Selection sort works by taking the smallest element in an unsorted array and bringing it to the front.
+You'll go through each item (from left to right) until you find the smallest one.
+
+Selection sort program:
+
+def selection_sort(arr):
+    for i in range(len(arr)):
+        min_index = i
+        for j in range(i + 1, len(arr)):
+            if arr[j] < arr[min_index]:
+                min_index = j
+        arr[i], arr[min_index] = arr[min_index], arr[i]
+arr = [14,8,2,19,69,1]
+selection_sort(arr)
+print("Sorted array is:", arr)
+
+Quick Sort:
+Quicksort is a divide-and-conquer algorithm. It works by selecting a 'pivot' element from the array and 
+partitioning the other elements into two sub-arrays, according to whether they are less than or greater than the pivot.
+
+Quick sort program:
+
+def quick_sort(lst):
+    if len(lst)<1:
+        return lst
+    else:
+        pv=lst[0]
+        left_lst=[i for i in lst if i<pv]
+        right_lst=[i for i in lst if i>pv]
+        return quick_sort(left_lst)+[pv]+quick_sort(right_lst)
+lst=list(map(int,input().split()))
+print(quick_sort(lst))
+
+Merge sort:
+Merge sort is one of the most efficient sorting algorithms. It is based on the divide-and-conquer strategy. 
+Merge sort continuously cuts down a list into multiple sublists until each has only one item, then merges those sublists into a sorted list.
+
+Merge Sort Program:
+
+def merge_sort(lst):
+    if len(lst)<=1:
+        return lst
+    else:
+        mid=len(lst)//2
+        left=lst[:mid]
+        right=lst[mid:]
+        merge_sort(left)
+        merge_sort(right)
+        i=j=k=0
+        while i<len(left) and j<len(right):
+            if left[i]<right[j]:
+                lst[k]=left[i]
+                i+=1
+                k+=1
+            else:
+                lst[k]=right[j]
+                j+=1
+                k+=1  
+        while i<len(left):
+            lst[k]=left[i]
+            i+=1
+            k+=1
+        while j<len(right):
+            lst[k]=right[j]
+            j+=1
+            k+=1
+lst=list(map(int,input().split()))
+merge_sort(lst)
+print(lst)
+                
+Inversions:
+ a reversal of position, order, form, or relationship: such as. 
+a(1) : a change in normal word order. especially : the placement of a verb before its subject. 
+
+Inversions Program:
+ 
+l=[6,3,9,2,1]
+c=0
+for i in range(len(l)-1):
+    for j in range(i+1,len(l)):
+        if l[i]>l[j]:
+            c+=1
+print(c)
+ Inversion of Merge Sort Program:
+
+def merge_inversion(lst):
+    global c
+    if len(lst)<=1:
+        return lst
+    else:
+        mid=len(lst)//2
+        left=lst[:mid]
+        right=lst[mid:]
+        merge_inversion(left)
+        merge_inversion(right)
+        i=j=k=0
+        while i<len(left) and j<len(right):
+            if left[i]<right[j]:
+                lst[k]=left[i]
+                i+=1
+                k+=1
+            else:
+                lst[k]=right[j]
+                c+=len(left)-i
+                j+=1
+                k+=1
+        while i<len(left):
+            lst[k]=left[i]
+            i+=1
+            k+=1
+        while j<len(right):
+            lst[k]=right[j]
+            j+=1
+            k+=1
+    return c
+lst=list(map(int,input().split()))
+c=0
+print(merge_inversion(lst))
+            
+                    
+
+
+                    
+
+        
+
