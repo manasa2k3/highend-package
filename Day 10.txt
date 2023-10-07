@@ -1,0 +1,160 @@
+Day 10:
+
+1.Reverse of name program:
+
+def demo(s):
+    l=[]
+    for i in s:
+        if i.isalpha():
+            l.append(i)
+        else:
+            spc=i
+            idxspc=s.index(i)
+    l.reverse()
+    l.insert(idxspc,spc)
+    return ''.join(l)
+s=input()
+print(demo(s))
+
+Input=manasa
+Output=asanama
+
+2.Balanced Braces Program:
+
+def demo(s):
+    c=0
+    l=[]
+    for i in s:
+        if i=='[' or i=='{' or i=='(':
+            l.append(i)
+            c+=1
+            continue
+        if len(l)==0:
+            return c+1
+        temp=l.pop()
+        if temp=='(' and i==')':
+            c+=1
+        elif temp=='[' and ']':
+            c+=1
+        elif temp=='{' and '}':
+            c+=1
+        else:
+            return c+1
+    if len(l)==0:
+        return 0
+    else:
+        return c+1
+s=input()
+if __name__ == "__main__":
+    print(demo(s))
+
+Input:() (]
+Output:4
+
+3.Print Max Value Program:
+
+s=input()
+loss=s.split(',')
+op=' '
+for i in loss:
+    nc=i.split(':')
+    name=nc[0]
+    code=nc[1]
+    max=0
+    for i in code:
+        if int(i)>max and int(i)<=len(name):
+            max=int(i)
+    if max==0:
+        op+='x'
+    else:
+        op+=name[max-1]
+print(op)
+
+Input:abhi:4384
+Output:i
+Here it takes the maximum value from the given input And it prints the max value of that number from the name.
+
+4.Separate odd Number Program:
+
+def sep_odd(input_string):
+    oddstring=" "
+    for i in range(len(input_string)):
+        if i%2 !=0:
+            oddstring=oddstring+str(int(input_string[i])**2)
+    return oddstring
+s=input()
+print(sep_odd(s)[:5:])     
+
+Input:756148
+Output:2516
+
+5.def demo(s):#2,5,1,4,3,2,7,8
+    loss=s.split(',')
+    idxpof=loss.index('4')
+    idxpos=loss.index('7')
+    n1,n2=0,''
+    for i in loss[:idxpof]+loss[idxpos+1:]:
+        n1+=int(i)
+    for i in loss[idxpof:idxpos+1]:
+        n2+=i
+    return (n1+int(n2))
+s=input()
+if __name__=='__main__':
+    print(demo(s))
+
+Input:2,5,1,4,3,2,7,8
+Output:4343
+
+6.Two pointer using one loop:
+
+def two_pointer_example(arr, target):
+    left = 0
+    right = len(arr) - 1
+    while left < right:
+        current_sum = arr[left] + arr[right]
+        if current_sum == target:
+            print("Found pair:", arr[left], arr[right])
+            left += 1
+            right -= 1
+        elif current_sum < target:
+            left += 1
+        else:
+            right -= 1
+arr = [2,3,5,7,10,12,15,20]
+target = 19
+two_pointer_example(arr, target)
+
+Output:Founded pair: 7 12
+
+7.Binary Search:
+
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = left + (right - left) // 2  
+        if arr[mid] == target:
+            return mid  
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1  
+arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+target = 5
+result = binary_search(arr, target)
+if result != -1:
+    print(f"Element {target} found at index {result}")
+else:
+    print(f"Element {target} not found at index{result}")
+
+Output:Element 5 found at index 4
+        
+    
+
+
+            
+    
+
+        
+    
+
