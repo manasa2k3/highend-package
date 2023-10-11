@@ -1,0 +1,141 @@
+Day 12:
+1.Count Number of Palindrome in Substring:
+
+def main():
+    _str="madammadam"
+    #a=input()
+    n=len(_str)
+    dp=[[0 for i in range(n)]for j in range(n)]
+    i,j=0,0
+    count=0
+    while j<n:
+        
+        jflag=j
+        while jflag<n:
+            if i==jflag:
+                dp[i][jflag]=1
+            elif abs(i-jflag)==1:
+                if _str[i]==_str[jflag]:
+                        dp[i][jflag]=1
+                        count+=1
+                else:
+                    dp[i][jflag]=0
+            else:
+                if _str[i]==_str[jflag]:
+                    if i+1<n and dp[i+1][jflag-1]==1:
+                        
+                        dp[i][jflag]=1
+                        count+=1
+                        
+                    else:
+                        dp[i][jflag]=0
+                else:
+                    dp[i][jflag]=0
+            i+=1
+            jflag+=1
+        j+=1
+        i=0
+    print(dp)
+    return count
+print(main())
+
+Output:
+[[1, 0, 0, 0, 1, 0, 0, 0, 0, 1], [0, 1, 0, 1, 0, 0, 0, 0, 1, 0], [0, 0, 1, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 1, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 1, 1, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 1, 0, 1, 0], [0, 0, 0, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]]
+9
+
+2.Count Largest Number of Palindrome in Substring:
+
+def is_palindrome(s):
+    return s == s[::-1]
+
+def count_palindromes_in_substrings(s):
+    s = s.lower()  # Convert to lowercase for case-insensitivity
+    max_palindrome_count = 0
+
+    for i in range(len(s)):
+        for j in range(i, len(s)):
+            substring = s[i:j+1]
+            if is_palindrome(substring):
+                max_palindrome_count = max(max_palindrome_count, len(substring))
+
+    return max_palindrome_count
+
+input_string = "madammadam"
+result = count_palindromes_in_substrings(input_string)
+print("Largest number of palindromes in substrings:", result)
+
+Output:
+Largest number of palindromes in substrings: 10
+
+3.Smallest Palindromic Substring which is not in 1 length:
+
+def is_palindrome(s):
+    return s == s[::-1]
+
+def find_smallest_non_single_char_palindrome(s):
+    s = s.lower()  # Convert to lowercase for case-insensitivity
+
+    for length in range(2, len(s) + 1):
+        for i in range(len(s) - length + 1):
+            substring = s[i:i + length]
+            if is_palindrome(substring):
+                return substring
+
+    return None
+
+input_string = "madammadam"
+result = find_smallest_non_single_char_palindrome(input_string)
+
+if result:
+    print("Smallest non-single character palindromic substring:", result)
+else:
+    print("No non-single character palindromic substring found.")
+
+Output:
+Smallest non-single character palindromic substring: mm
+
+4.Str='bfffbfbffb' Palindromic Program:
+
+def main():
+    _str = "bfffbfbffb"
+    n = len(_str)
+    dp = [[0 for i in range(n)] for j in range(n)]
+    i, j = 0, 0
+    largest_palindrome = ""
+
+    while j < n:
+        jflag = j
+        while jflag < n:
+            if i == jflag:
+                dp[i][jflag] = 1
+                if jflag - i + 1 > len(largest_palindrome):
+                    largest_palindrome = _str[i:jflag + 1]
+            elif abs(i - jflag) == 1:
+                if _str[i] == _str[jflag]:
+                    dp[i][jflag] = 1
+                    if jflag - i + 1 > len(largest_palindrome):
+                        largest_palindrome = _str[i:jflag + 1]
+                else:
+                    dp[i][jflag] = 0
+            else:
+                if _str[i] == _str[jflag]:
+                    if i + 1 < n and dp[i + 1][jflag - 1] == 1:
+                        dp[i][jflag] = 1
+                        if jflag - i + 1 > len(largest_palindrome):
+                            largest_palindrome = _str[i:jflag + 1]
+                    else:
+                        dp[i][jflag] = 0
+                else:
+                    dp[i][jflag] = 0
+            i += 1
+            jflag += 1
+        j += 1
+        i = 0
+    print("Largest palindromic substring:", largest_palindrome)
+    return largest_palindrome
+
+print(main())
+
+Output:
+Largest palindromic substring: ffbfbff
+ffbfbff
