@@ -1,0 +1,53 @@
+Day 18:
+
+1.Hash program:
+
+def hash_function(value):
+    return value%10
+def main():
+    search_keys = [12,23,45,43,42,54,53,65,75,67,87]
+    n = 11
+    hash_table = [[] for i in range(n)]
+    for value in search_keys:
+        hash_value = hash_function(value)
+        hash_table[hash_value].append(value)
+    print(hash_table)
+main()
+
+Output:
+[[], [], [12, 42], [23, 43, 53], [54], [45, 65, 75], [], [67, 87], [], [], []]
+
+2.Hashed Value:
+
+def get_hashed_value(value):
+    return value%10
+
+def get_next_available_index(hash_table,current_index):
+    for i in range(current_index,len(hash_table)):
+        if hash_table[i] == 0:
+            return i
+        elif i == len(hash_table)-1:
+            i = 0
+def main():
+    search_key = [12,32,45,34,65,78,90,112]
+    n = 10
+    hash_table = [0 for i in range(n)]
+
+    for key in search_key:
+        current_index = get_hashed_value(key)
+        if hash_table[current_index] == 0:
+            hash_table[current_index] = key
+        else:
+            next_index = get_next_available_index(hash_table,current_index)
+            hash_table[next_index] = key
+
+    print(hash_table)
+main()
+
+Output:
+[90, 0, 12, 32, 34, 45, 65, 112, 78, 0]
+
+ 
+
+
+
