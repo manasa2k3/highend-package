@@ -1,0 +1,68 @@
+1.If given number is not prime then print the next prime number
+//code is here//
+def add(n):
+    s=0
+    while(n):
+        s=s+(n%10)
+        n=n//10
+    return s
+def pnp(n):
+    if (n is [2,3,5,7]):
+        return m
+    else:
+        return m+1       
+n=int(input())
+m=n
+if(n<10):
+    print(pnp(n))
+else:
+    while(1):
+       n=add(n)
+       if(n<10):
+           break
+    print(pnp(n))
+o/p=121
+    122
+2.print evensum and oddsum 
+//code//
+a=int(input("enter the number:"))
+even_sum = 0
+odd_sum = 0
+for i in range(1,a+1):
+    if i % 2 == 0:
+        even_sum += i
+    else:
+        odd_sum += i
+print(f"Sum of even numbers:", even_sum)
+print(f"Sum of odd numbers:", odd_sum)
+o/p=enter the number:5
+    evennumber=6
+    oddnumber=9
+3.writing postfix number using stacks
+//code//
+a="leet**co*de"
+b=[]
+for i in a:
+    if(i!='*'):
+        b.append(i)
+    else:
+        b.pop()
+print("".join(b))
+o/p=locde
+4.In given list if it is prime number then print yes otherwise print no
+//code//
+a=[1,2,3,4,5,6]
+if len(a) % 2 == 0:
+    print("yes")
+else:
+    print("no")
+o/p:yes
+5.Take input as sentence4 a3 is2 This1 o/p should be This is a sentence
+//code//
+a = input().split()
+re = [0] * len(a)
+for i in a:
+    re[int(i[-1]) - 1] = i[:-1]
+print(' '.join(re))
+o/p:sentence4 a3 is2 This1
+This is a sentence
