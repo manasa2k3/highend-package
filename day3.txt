@@ -1,0 +1,82 @@
+1.Take a I/p as d5 or something and find the o/p that which comes at index 5 that is the output is going to show u as y
+//code//
+def reverse(input_str):
+    letter, num = input_str[0], int(input_str[1])
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    ori_pos = alphabet.index(letter)
+    new_pos = ori_pos - num
+    new_pos = new_pos % 26
+    return alphabet[new_pos]
+print(reverse("d5")) 
+o/p:y
+2.Print the longest length of substring which has alphabet in sequence
+//code//
+def longest_alphabetical_substring(s):
+    max_len = 0
+    current_len = 0
+    for i in range(len(s)):
+        if s[i] >= s[i-1]:
+            current_len += 1
+            max_len = max(max_len, current_len)
+        else:
+            current_len = 1
+    return max_len
+a = "xyzabcdefklmnopqefgh"
+print(longest_alphabetical_substring(a))
+o/p:13
+3.check palindrome or not using recursion
+//code//
+def rev(n, temp): 
+	if (n == 0): 
+		return temp
+	temp = (temp * 10) + (n % 10)
+	return rev(n // 10, temp) 
+n = int(input()) 
+temp = rev(n, 0) 
+if (temp == n): 
+	print("palindrome")
+else:
+	print("not a palindrome")
+o/p:123321
+palindrome
+4.Check palindrome or not
+n = 6  
+for i in range(n):
+    for j in range(n):
+            print("1", end=" ")      
+    print() 
+o/p:12345
+not a palindrome
+5.print the astreics in triangle  manner
+//code//
+rows = 5
+for i in range(1, rows + 1):
+  print(" " * (rows - i), end="")
+  print("*", end="")
+  for j in range(1, i + 1):
+    print(" {}".format(j), end="")
+  print(" *", end="")
+  print()
+o/p:* 1 *
+   * 1 2 *
+  * 1 2 3 *
+ * 1 2 3 4 *
+* 1 2 3 4 5 *
+8.Take a 3 cross 3 matrix and check row wise whether the given number are taken in row wise or not 
+//code//
+def check_matrix(matrix, s):
+    r = [''.join(row) for row in matrix]
+    c = [''.join(column) for column in zip(*matrix)]
+    return s in r or s[::-1] in c
+n = int(input("Enter the number of rows: "))
+matrix = [input().strip() for _ in range(n)]
+s = input("Enter the string to check: ").strip()
+a = check_matrix(matrix, s)
+print(a)
+o/p:
+Enter the number of rows: 3
+xyz
+abc
+pqr
+Enter the string to check: xapybrzc
+true  
