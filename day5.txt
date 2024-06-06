@@ -1,0 +1,226 @@
+1.1221 leetcode question
+def max_balanced_strings(s: str) -> int:
+    balance = 0
+    count = 0
+    for char in s:
+        if char == 'L':
+            balance += 1
+        else:
+            balance -= 1
+        if balance == 0:
+            count += 1
+    return count
+s1 = "RLRRLLRLRL"
+s2 = "RLRRRLLRLL"
+s3 = "LLLLRRRR"
+print(max_balanced_strings(s1))  
+print(max_balanced_strings(s2))  
+print(max_balanced_strings(s3))
+o/p: 4
+     2
+     1
+
+2.3120 leetcode question
+//code//
+class solution:
+    def balancedStringSplit(self, s):
+        count=0
+        l_count=0
+        r_count=0
+        for i in s:
+            if(i=='R'):
+                l_count+=1
+            else:
+                l_count-=1
+            if(l_count==0):
+                r_count+=1
+        return r_count
+s="RLRRLLRLRL"
+s1=solution()
+print(s1.balancedStringSplit(s))
+o/p:4
+
+3. 3121 leetcode question 
+//code//
+class Solution:
+    def numberOfSpecialChars(self, word):
+        count=0
+        a=set()
+        if a.isupper():
+            if a.upper():
+                count+=1
+            else:
+                a.lower in word
+                count+=1
+        return count
+word="aaAbcBC"
+s=Solution()
+print(s.numberOfSpecialChars(word))
+
+4.520 leetcode question
+//code//
+class Solution:
+    def detectCapitalUse(self, word):
+        if word.isupper():
+            return True
+        if word.islower():
+            return True
+        if word[0] is upper and word[1:] is lower:
+            return True
+        return False
+word="USA"
+s=Solution()
+print(s.detectCapitalUse(word))
+
+5.leetcode question
+//code//
+def count_special_letters(word):
+    special_letters = set()
+    for char in word:
+        if char.isalpha():
+            lowercase_char = char.lower()
+            if lowercase_char in special_letters:
+                special_letters.add(lowercase_char)
+    return len(special_letters)
+word1 = "aaAbcBC"
+word2 = "abc"
+word3 = "AbBCab"
+print(count_special_letters(word1))  
+print(count_special_letters(word2))  
+print(count_special_letters(word3))  
+
+6.leetcode question //code//
+class Solution(object):
+    def numberOfSpecialChars(self, word):
+        c=0
+        s=''
+        for char in word:
+            if char.islower() and char.upper() in word and char not in s:
+                s+=char
+                if word.rindex(char)<word.index(char.upper()):
+                    c+=1
+        return c
+7.Double LinkedList
+//code//
+class Node:
+    def __init__(self,u):
+        self.data=u
+        self.prev=None
+        self.next=None
+class dll:
+    def __init__(self):
+        self.head=None
+        self.tail=None
+    def addback(self,x):
+        if(self.head==None):
+            self.head=Node(x)
+            self.tail=self.head
+        else:
+            self.tail.next=Node(x)
+            self.tail.next.prev=self.tail
+            self.tail=self.tail.next
+            
+    def addFront(self,x):
+        if self.head is None:
+            self.head=Node(x)
+            self.tail=self.head
+        else:
+            self.head.prev=Node(x)
+            self.head.prev.next=self.head
+            self.head=self.head.prev
+            
+    def search_element(self, value):
+        temp = self.head
+        while temp is not None:
+            if temp.data == value:
+                print("found")
+                return True
+            temp = temp.next
+        print("not found")
+        return False
+    
+    def length(self):
+        temp=self.head
+        c=0
+        while(temp):
+            c+=1
+            temp=temp.next
+        return "even" if c%2==0 else "odd"
+    
+    def palindrome(self):
+        temp1=self.head
+        temp2=self.tail
+        while(temp1!=temp2 and temp1!=temp2.next):
+            if temp1.data!=temp2.data:
+                print("not palindrome")
+                break
+            else:
+                temp1=temp.data
+                temp2=temp2.prev
+                print("palindrome")
+                
+    def change(self):
+        temp1=self.head
+        temp2=self.tail
+        while(temp1!=temp2.next):
+                temp1=temp1.next
+                temp2=temp2.prev
+        temp2=temp2.next
+        temp3=self.head
+        while temp2 is not None:
+            temp3.data,temp2.data=temp2.data,temp3.data
+            temp3=temp3.next
+            temp2=temp2.next
+                
+    def display(self):       
+        temp = self.head;          
+        while(temp != None):        
+            print(temp.data,end="->");    
+            temp = temp.next;
+        print("\n")
+    
+d=dll()
+d.addback(10)
+d.addback(20)
+d.addback(30)
+d.addback(40)
+d.addback(50)
+d.addback(60)
+d.display()
+print(d.search_element(1))
+print(d.length())
+d.palindrome()
+d.change()
+d.display()
+o/p:10->20->30->40->50->60->
+not found
+False
+even
+not palindrome
+40->50->60->10->20->30->
+
+8.reverse linked list leetcode question 
+class Solution(object):
+    def reverseBetween(self, head, left, right):
+        if not head or left==right:
+            return head
+        curr=node
+        curr.next=head
+        a=curr
+        prev=a
+        for i in range(left-1):
+            prev=prev.next
+            start=prev.next
+        for i in range(right-left):
+            start.next=then
+            then.next=prev.next
+            prev.next=then
+            then=start.next
+        return curr.next
+
+
+
+
+            
+        
+
