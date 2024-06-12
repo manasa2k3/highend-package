@@ -1,0 +1,238 @@
+class Node:
+    def _init_(self,val=None) -> None:
+        self.left=None
+        self.right=None
+        self.data=val
+class BST:
+    def init(self) -> None:
+        self.root=None
+    def addNode(self,root,val):
+        if root is None:
+            return Node(val)
+        elif root.data>val:
+            root.left=self.addNode(root.left,val)
+        else:
+            root.right=self.addNode(root.right,val)
+        return root
+    def inorder(self,root):
+        if root is None:
+            return 
+        self.inorder(root.left)
+        print(root.data,end=" ")
+        self.inorder(root.right)
+    def preorder(self,root,ans=[]):
+        if root is None:
+            return []
+        ans+=[root.data]
+        ans+=self.preorder(root.left)
+        ans+=self.preorder(root.right)
+        return ans
+    def postorder(self,root,ans=[]):
+        if root is None:
+            return []
+        ans+=self.postorder(root.left)
+        ans+=self.postorder(root.right)
+        ans+=[root.data]
+        return ans
+    def sum(self,root,s=0):
+        if root is None:
+            return 0
+       
+        return root.data+self.sum(root.left)+self.sum(root.right)
+    def eosum(self,root,es=0,os=0):
+        if root is None:
+            return (0,0)
+        
+        es,os=self.eosum(root.left)
+        e,o=self.eosum(root.right)
+        es+=e
+        os+=o
+        if root.data%2==0:
+            es+=root.data
+        else:
+            os+=root.data
+        return (es,os)
+    def even_sum(self,root):
+        if root is None:
+            return 0
+        if root.data%2==0:
+            return root.data+self.even_sum(root.left)+self.even_sum(root.right)
+        else:
+            return self.even_sum(root.left)+self.even_sum(root.right)
+    def odd_sum(self,root):
+        if root is None:
+            return 0
+        if root.data%2:
+            return root.data+self.odd_sum(root.left)+self.odd_sum(root.right)
+        else:
+            return self.odd_sum(root.left)+self.odd_sum(root.right)
+    def eodiff(self,root):
+        if root==None:
+           return 0
+        if root.data%2==0:
+          return root.data+self.eodiff(root.left)+self.eodiff(root.right)
+        else:
+            return (self.eodiff(root.left)+self.eodiff(root.left)+self.eodiff(root.right)-root.data)
+    def Height(self,root,left=0,right=0):
+        if root is None:
+            return
+        if root.left is None and root.right is None:
+            return 0
+        if root.left:
+            left=1+self.Height(root.left)
+        if root.right:
+            right=1+self.Height(root.right)
+        return max(left,right)
+    def Balanced(self,root):
+        return abs(self.Height(root.left)-self.Height(root.right))
+        if (Balanced(root)):
+            print("Balanced")
+        else:
+            print("not Balanced")
+    def SumofLeafnodes(self,root,sum=0):
+        if root.left is None and root.right is None:
+            sum+=1
+            return sum
+        if root.left:
+            sum+=self.SumofLeafnodes(root.left,sum)
+        if root.right:
+            sum+=self.SumofLeafnodes(root.right,sum)
+        return sum
+    def search(self,root,x=0):
+        if root==None:
+            return "NotFound"
+        if root.data==x:
+            return "Found"
+        if root.data>x:
+            self.search(root.left,x)
+            return "NotFound"
+        else:
+            self.search(root.right,x)
+            return "Found"
+    def depth(self,root,key=0,d=0,flag=False):
+        if root is None:
+            return -1,False
+        if root.data==key:
+            print(d)
+            flag=True
+            return (d,flag)
+        if not flag:
+            if key<root.data:
+                d,flag=self.depth(root.left,key,d+1,flag)
+            else:
+                d,flag=self.depth(root.right,key,d+1,flag)
+        return (d,flag)
+    def Leftview(self,root,c,l):
+        if root==None:
+            return 
+        if c not in l:
+            l.append(c)
+            print(root.data,end="")
+            self.Leftview(root.left,c+1,l)
+            self.Leftview(root.right,c+1,l)
+    def Rightview(self,root,c,l):
+        if root==None:
+            return
+        if c not in l:
+            l.append(c)
+            print(root.data,end="")
+            self.Rightview(root.right,c+1,l)
+    
+    def Topview(self,root,c=0,d={}):
+        if root is None:
+            return d
+        print(root.data,c)
+        if c not in d:
+                d[c]=root.data
+        else:
+            if d[c]<root.data and c>0: 
+                d[c]=root.data
+        d=self.Topview(root.left,c-1,d)
+        d=self.Topview(root.right,c+1,d)
+        return d
+nodes=list(map(int,input().split(" ")))
+tree=BST()
+
+tree.root=Node(nodes[0])
+for i in range(1,len(nodes)):
+    tree.addNode(tree.root,nodes[i])
+print("Inorder")
+tree.inorder(tree.root)
+print("Preorder")
+tree.preorder(tree.root)
+print("Postorder")
+tree.postorder(tree.root)
+print("\n")
+print("sum: " ,tree.sum(tree.root))
+es,os=tree.eosum(tree.root)
+print(f'even sum= {es},odd sum ={os}')
+print("only even sum : ",tree.even_sum(tree.root))
+print("only odd sum : ",tree.odd_sum(tree.root))
+print("difference of even and odd sum",abs(tree.eodiff(tree.root)))
+print("height of the tree",tree.Height(tree.root))
+print("balanced of the tree",tree.Balanced(tree.root))
+print("sum of no of leaf nodes",tree.SumofLeafnodes(tree.root,sum=0))
+print("search the element",tree.search(tree.root,x=0))
+print("left view of tree",tree.Leftview(tree.root,0,[]))
+print("right view of tree",tree.Rightview(tree.root,0,[]))
+print("Top view of tree",tree.Topview(tree.root,c=0))
+print("depth of the tree",tree.depth(tree.root,key=0,d=0))
+o/p:>>> %Run -c $EDITOR_CONTENT
+10 5 20 2 7 6 8
+Inorder
+2 5 6 7 8 10 20 Preorder
+Postorder
+
+
+sum:  58
+even sum= 46,odd sum =12
+only even sum :  46
+only odd sum :  12
+difference of even and odd sum 42
+height of the tree 3
+balanced of the tree 2
+sum of no of leaf nodes 17
+search the element NotFound
+1052left view of tree None
+1020right view of tree None
+10 0
+5 -1
+2 -2
+7 0
+6 -1
+8 1
+20 1
+Top view of tree {0: 10, -1: 5, -2: 2, 1: 20}
+depth of the tree (-1, False)
+2.Take i/p and print prime number in between them and do the sum i/p is [4,8,14,22,36,68]
+//code//
+l=list(map(int,input().split()))
+i=0
+while i+2<len(l):
+    if l[i]>l[i+1]:
+        l[i],l[i+1]=l[i+1],l[i]
+    elif l[i+1]>l[i+2]:
+        l[i+1],l[i+2]=l[i+2],l[i+1]
+    else:
+        i+=1
+print(l)
+o/p:
+[4,9,8,2,14,3,5,6]
+[4,2,8,3,5,6,9,14]
+3.Take i/p as hello:5438,car:214,book:8799,apple:2187 o/p:oaxp
+//code//
+def fun(a,b):
+    l=len(a)
+    for i in range(l,0,-1):
+        if str(i) in b:
+            return a[i-1]
+    return 'x'
+s=""
+ip=input().split(",")
+for i in ip:
+    a,b=i.split(":")
+    s+=fun(a,b)
+print(s)
+o/p:hello:5438,car:214,book:8799,apple:2187
+oaxp
+
