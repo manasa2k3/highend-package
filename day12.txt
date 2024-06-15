@@ -1,0 +1,171 @@
+1.Print the largest salary from given input:
+//code//
+def dpLargestAmount(time,salary):
+    a=list(salary)
+    for i in range(len(a)):
+        for j in range(i):
+            if time[j][1]<=time[i][0]:
+                if a[j]+salary[i]>a[i]:
+                    a[i]=a[j]+salary[i]
+    print(max(a))
+    print(a)                   
+time=[(1,3),(2,5),(4,6),(6,7),(5,8),(7,9)]
+salary=[5,6,5,4,11,2]
+dpLargestAmount(time,salary)
+o/p:17
+
+2.Print Subsequence of "abcd"
+//code//
+def Subsequence(curr,i,a):
+    if i==len(a):
+        return
+    for j in range(i,len(a)):
+        res.append(curr+a[j])
+        Subsequence(curr+a[j],j+1,a)
+res=[]
+Subsequence("",0,"abcd")
+print(res)
+o/p:['a', 'ab', 'abc', 'abcd', 'abd', 'ac', 'acd', 'ad', 'b', 'bc', 'bcd', 'bd', 'c', 'cd', 'd']
+
+3.Count the number of Island
+//code//
+def modify(a,i,j,n):
+    if i<0 or j<0 or i>=n or j>=n:
+        return
+    if a[i][j]==1:
+        a[i][j]=2
+        modify(a,i,j-1,n)
+        modify(a,i,j+1,n)
+        modify(a,i-1,j,n)
+        modify(a,i+1,j,n)
+    
+def CountnoofIsland(a,n):
+    count=0
+    for i in range(n):
+        for j in range(n):
+            if a[i][j]==1:
+                count+=1
+                modify(a,i,j,n)
+    return count
+a=[[0,1,0,0,1],
+   [1,0,0,1,1],
+   [0,0,0,0,0],
+   [1,0,0,0,0],
+   [1,0,0,0,1]]
+n=5
+print(CountnoofIsland(a,n))
+o/p:5
+4.Count Number of Hours:
+//code//
+def noofHours(n):
+    hrs=mins=secs=0
+    hrs=n//3600
+    n=n%3600
+    mins=n//60
+    secs=n%60
+    print(f"{hrs}h:{mins}m:{secs}s")
+n=int(input())
+noofHours(n)
+o/p:500
+    0h:8m:20s
+5.Minimum Number of Coins
+//code//
+def minofCoins(coins,k):
+    c=0
+    coins.sort()
+    for  i in range(len(coins)-1,-1,-1):
+        print(k)
+        if k%coins[-i]==0:
+            c+=k//coins[i]
+            break
+        else:
+            c+=k//coins[i]
+            k=k%coins[i]
+        if k==0:
+            break
+    print(c)
+coins=[4,3,7]
+k=17
+minofCoins(coins,k)
+o/p:17
+3
+6.Count no of years:
+//code//def noofYear(n):
+    year=month=week=day=0
+    year=n//360
+    n=n%360
+    month=n//30
+    n=n%30
+    week=n//6
+    day=n%7
+    print(f"{year}y,{month}m,{week}w,{day}d")
+n=int(input())
+noofYear(n)
+o/p:76564
+212y,8m,0w,4d
+7.Largest Subsequence 
+//code//
+def LargestSubsequence(s1,s2):
+    m=[]
+    for i in range(len(s2)+1):
+        l=[0]*(len(s1)+1)
+        m.append(l)
+    for i in range(1,len(s2)+1):
+        for j in range(1,len(s1)+1):
+            if(s2[i-1]==s1[j-1]):
+                m[i][j]=m[i-1][j-1]+1
+            else:
+                m[i][j]=max(m[i][j-1],m[i-1][j])
+    print(m[len(s2)][len(s1)])
+    print(m)
+s1="abcd"
+s2="axbdc"
+LargestSubsequence(s1,s2)
+o/p:3
+    [[0, 0, 0, 0, 0], [0, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 1, 2, 2, 2], [0, 1, 2, 2, 3], [0, 1, 2, 3, 3]]
+8.Longest Subsequence of any string
+//code//
+def LargestSubsequence(s1,s2):
+    m=[]
+    for i in range(len(s2)+1):
+        l=[0]*(len(s1)+1)
+        m.append(l)
+    for i in range(1,len(s2)+1):
+        for j in range(1,len(s1)+1):
+            if(s2[i-1]==s1[j-1]):
+                m[i][j]=m[i-1][j-1]+1
+            else:
+                m[i][j]=max(m[i][j-1],m[i-1][j])
+    print(m[len(s2)][len(s1)])
+    print(m)
+    LongestSubsequence(m,s1,s2)
+    
+def LongestSubsequence(dp,s1,s2):
+    i=len(dp)-1
+    s=""
+    j=len(dp[0])-1
+    while j>0:
+        if dp[i][j]==max(dp[i-1][j],dp[i][j-1]):
+            if dp[i-1][j]>dp[i][j-1]:
+                i-=1
+            else:
+                j-=1
+        else:
+            s+=s1[j-1]
+            i-=1
+            j-=1
+        if dp[i][j]==0:
+            break
+    print(s[::-1])
+s1="abcd"
+s2="axbd"
+LargestSubsequence(s1,s2)
+o/p:3
+[[0, 0, 0, 0, 0], [0, 1, 1, 1, 1], [0, 1, 1, 1, 1], [0, 1, 2, 2, 2], [0, 1, 2, 2, 3]]
+abd
+  
+        
+    
+    
+    
+    
